@@ -27,10 +27,20 @@ body{
   background:var(--bg); color:var(--ink); font-family:'Inter',sans-serif;
   padding-bottom:70px; position:relative;
 }
-.bg-geo{ position:fixed; inset:0; z-index:-1; overflow:hidden; pointer-events:none; }
-.bg-geo svg{ width:100%; height:100%; display:block; }
+.bg-geo{
+  position:fixed; inset:0; z-index:-1; overflow:hidden; pointer-events:none;
+  background:
+    radial-gradient(720px 580px at 6% -4%, rgba(0,114,180,0.29), transparent 62%),
+    radial-gradient(630px 520px at 40% -6%, rgba(0,174,234,0.24), transparent 60%),
+    radial-gradient(760px 630px at 82% 4%, rgba(0,165,81,0.22), transparent 62%),
+    radial-gradient(630px 540px at -4% 52%, rgba(172,195,43,0.20), transparent 60%),
+    radial-gradient(700px 580px at 100% 46%, rgba(244,163,33,0.24), transparent 62%),
+    radial-gradient(630px 520px at 30% 104%, rgba(234,95,0,0.19), transparent 60%),
+    radial-gradient(700px 580px at 92% 100%, rgba(236,28,36,0.18), transparent 62%),
+    linear-gradient(180deg, #EEF4FA 0%, #FFFFFF 54%);
+}
 .mono{ font-family:'IBM Plex Mono',monospace; }
-.wrap{ max-width:1180px; margin:0 auto; padding:0 28px; position:relative; }
+.wrap{ max-width:1360px; margin:0 auto; padding:0 28px; position:relative; }
 
 /* ============ RAINBOW TOP BAR ============ */
 .rainbow-bar{ height:7px; width:100%; background: linear-gradient(90deg,
@@ -90,38 +100,54 @@ section{ padding-top:46px; }
 .chip .cnt{ opacity:.6; margin-left:4px; }
 
 /* ============ APP GRID ============ */
-.app-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
-@media(max-width:940px){ .app-grid{grid-template-columns:repeat(2,1fr);} }
-@media(max-width:620px){ .app-grid{grid-template-columns:1fr;} }
+.app-grid{ display:grid; grid-template-columns:repeat(5,1fr); gap:16px; }
+@media(max-width:1180px){ .app-grid{grid-template-columns:repeat(4,1fr);} }
+@media(max-width:940px){ .app-grid{grid-template-columns:repeat(3,1fr);} }
+@media(max-width:700px){ .app-grid{grid-template-columns:repeat(2,1fr);} }
+@media(max-width:460px){ .app-grid{grid-template-columns:1fr;} }
+
+.cat-heading{
+  grid-column:1/-1; display:flex; align-items:center; gap:9px;
+  font-family:'Archivo',sans-serif; font-weight:800; font-size:13px; letter-spacing:.3px;
+  color:var(--ink); text-transform:uppercase; padding-bottom:9px; margin:30px 0 2px;
+  border-bottom:1px solid var(--line);
+}
+.cat-heading:first-child{ margin-top:0; }
+.cat-heading .dot{ width:9px; height:9px; border-radius:50%; flex-shrink:0; box-shadow:0 0 0 3px rgba(0,0,0,0.05); }
+.cat-heading .cnt{ margin-left:auto; font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:11px; letter-spacing:0; text-transform:none; color:var(--ink-soft); }
 
 .app-card{
   display:block; text-decoration:none; color:inherit; text-align:left; width:100%;
-  background:#fff; border:1px solid var(--line); border-radius:20px; padding:26px;
-  position:relative; overflow:hidden; transition: transform .25s cubic-bezier(.2,.8,.3,1), box-shadow .25s ease, border-color .25s ease;
+  background:#fff; border:1px solid var(--line); border-radius:16px; padding:17px;
+  border-top:4px solid var(--accent-top, var(--line));
+  position:relative; overflow:hidden;
+  box-shadow: 0 1px 2px rgba(15,23,42,0.04), 0 10px 24px -10px rgba(15,23,42,0.18);
+  transition: transform .25s cubic-bezier(.2,.8,.3,1), box-shadow .25s ease, border-color .25s ease;
   font-family:inherit; cursor:default;
 }
 .app-card.clickable{ cursor:pointer; }
-.app-card.clickable:hover{ transform: translateY(-5px) rotate(-0.3deg); box-shadow: 0 16px 32px rgba(0,0,0,0.10); border-color:transparent; }
+.app-card.clickable:hover{ transform: translateY(-6px) rotate(-0.3deg); box-shadow: 0 4px 10px rgba(15,23,42,0.08), 0 24px 44px -12px rgba(15,23,42,0.28); border-color:transparent; border-top-color:var(--accent-top, var(--line)); }
 .app-card.planned{ cursor:not-allowed; }
 .app-card.planned .app-name, .app-card.planned .app-desc{ opacity:.75; }
 
 .app-icon{
-  width:56px; height:56px; border-radius:16px; display:flex; align-items:center; justify-content:center;
-  margin-bottom:14px; color:#fff; flex-shrink:0;
+  width:40px; height:40px; border-radius:12px; display:flex; align-items:center; justify-content:center;
+  margin-bottom:10px; color:#fff; flex-shrink:0;
+  box-shadow: inset 0 1px 1px rgba(255,255,255,0.35), 0 6px 14px -6px rgba(15,23,42,0.35);
 }
-.app-icon svg{ width:28px; height:28px; }
+.app-icon svg{ width:20px; height:20px; }
 .app-card.planned .app-icon{ filter:grayscale(85%) opacity(0.55); }
 
-.app-cat{ font-family:'IBM Plex Mono',monospace; font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:6px; display:block; }
+.app-cat{ font-family:'IBM Plex Mono',monospace; font-size:9px; font-weight:700; letter-spacing:.8px; text-transform:uppercase; margin-bottom:4px; display:block; }
 
-.app-status{ position:absolute; top:22px; right:22px; font-family:'IBM Plex Mono',monospace; font-size:9.5px; font-weight:700; padding:4px 10px; border-radius:20px; letter-spacing:.4px; white-space:nowrap; }
+.app-status{ position:absolute; top:14px; right:14px; font-family:'IBM Plex Mono',monospace; font-size:8px; font-weight:700; padding:3px 7px; border-radius:20px; letter-spacing:.3px; white-space:nowrap; }
 .app-status.live{ background:rgba(0,165,81,0.12); color:var(--c3); }
 .app-status.dev{ background:rgba(0,114,180,0.12); color:var(--c1); }
 .app-status.soon{ background:#EFF0F1; color:var(--ink-soft); }
 
-.app-name{ font-family:'Archivo',sans-serif; font-weight:800; font-size:16.5px; color:var(--ink); line-height:1.3; padding-right:70px;}
+.app-name{ font-family:'Archivo',sans-serif; font-weight:800; font-size:14px; color:var(--ink); line-height:1.28; padding-right:0;}
 .app-desc{ font-size:12.5px; color:var(--ink-soft); margin-top:8px; line-height:1.55; min-height:52px;}
-.app-cta{ display:flex; align-items:center; gap:6px; margin-top:16px; font-family:'Archivo',sans-serif; font-weight:700; font-size:12.5px; }
+.app-cta{ display:flex; align-items:center; gap:6px; margin-top:10px; font-family:'Archivo',sans-serif; font-weight:700; font-size:11px; }
 .app-cta .arrow{ transition: transform .2s ease; }
 .app-card.clickable:hover .app-cta .arrow{ transform: translateX(4px); }
 .app-hybrid-tag{ display:inline-flex; align-items:center; gap:5px; margin-top:14px; font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--ink-soft); }
@@ -139,10 +165,10 @@ section{ padding-top:46px; }
 .hybrid-item.disabled{ color:var(--ink-soft); cursor:default; }
 
 /* ghost "add new theme" card */
-.app-card.ghost{ border-style:dashed; display:flex; flex-direction:column; align-items:flex-start; justify-content:center; min-height:180px; color:var(--ink-faint); }
-.app-card.ghost .plus{ width:44px; height:44px; border-radius:14px; border:1.5px dashed var(--ink-faint); display:flex; align-items:center; justify-content:center; margin-bottom:14px; font-size:22px; font-weight:300; }
-.app-card.ghost b{ font-family:'Archivo',sans-serif; font-size:14px; color:var(--ink-soft); }
-.app-card.ghost span{ font-size:12px; margin-top:6px; line-height:1.5; max-width:240px; }
+.app-card.ghost{ border-style:dashed; display:flex; flex-direction:column; align-items:flex-start; justify-content:center; min-height:140px; color:var(--ink-faint); }
+.app-card.ghost .plus{ width:34px; height:34px; border-radius:11px; border:1.5px dashed var(--ink-faint); display:flex; align-items:center; justify-content:center; margin-bottom:10px; font-size:18px; font-weight:300; }
+.app-card.ghost b{ font-family:'Archivo',sans-serif; font-size:13px; color:var(--ink-soft); }
+.app-card.ghost span{ font-size:11px; margin-top:5px; line-height:1.5; max-width:200px; }
 
 /* ============ FOOTER ============ */
 footer{ margin-top:64px; padding-top:24px; border-top:1px solid var(--line); text-align:center; color:var(--ink-faint); font-size:11px; }
@@ -151,19 +177,7 @@ footer .mono{ color:var(--c1); }
 </head>
 <body>
 
-<div class="bg-geo">
-  <svg viewBox="0 0 1440 1200" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-    <polygon points="0,0 560,0 220,430" fill="#0072B4" opacity="0.045"/>
-    <polygon points="320,0 980,0 640,380" fill="#00AEEA" opacity="0.045"/>
-    <polygon points="760,0 1440,0 1440,340 980,560" fill="#00A551" opacity="0.04"/>
-    <polygon points="0,320 430,560 0,980" fill="#ACC32B" opacity="0.045"/>
-    <polygon points="1440,300 1440,980 940,980 1160,600" fill="#F4A321" opacity="0.045"/>
-    <polygon points="180,980 760,980 520,650" fill="#EA5F00" opacity="0.04"/>
-    <polygon points="940,1200 1440,1200 1440,780 1140,980" fill="#EC1C24" opacity="0.04"/>
-    <polygon points="380,430 860,320 760,760 420,760" fill="#FCB813" opacity="0.04"/>
-    <polygon points="0,1000 380,1200 0,1200" fill="#0072B4" opacity="0.03"/>
-  </svg>
-</div>
+<div class="bg-geo"></div>
 
 <div class="rainbow-bar"></div>
 
@@ -176,7 +190,6 @@ footer .mono{ color:var(--c1); }
     </div>
     <div class="eyebrow"><span class="dot"></span>PCP CORPORATIVO</div>
     <h1>Repositório de <span class="rb">Apps</span></h1>
-    <div class="subtitle">Ponto único de acesso às ferramentas da área — torres de controle, motores de cálculo e painéis de acompanhamento. Clique em um card para abrir.</div>
 
     <div class="hero-stats">
       <div class="hstat"><span class="n" id="st-live">0</span><span class="l">App ativo</span></div>
@@ -199,9 +212,6 @@ footer .mono{ color:var(--c1); }
 <div class="wrap">
 
 <section>
-  <div class="sec-title">Ferramentas</div>
-  <div class="sec-desc">Novos apps entram aqui conforme forem publicados — este repositório cresce junto com a estruturação da área. Use os filtros para navegar por tema.</div>
-
   <div class="filter-row" id="filterRow"></div>
   <div class="app-grid" id="appGrid"></div>
 </section>
@@ -382,45 +392,62 @@ function renderGrid(filter){
   const grid = document.getElementById('appGrid');
   grid.innerHTML = '';
 
-  APPS.filter(a=> filter==='all' || a.cat===filter).forEach(app=>{
-    const cat = CATEGORIES[app.cat];
-    const isHybrid = Array.isArray(app.children) && app.children.length>0;
-    const clickable = app.status==='live' || isHybrid;
-    const tag = isHybrid ? 'div' : (clickable ? 'a' : 'div');
+  // organiza sempre por tema (categoria) — quando um filtro específico está
+  // ativo, mostra só aquele grupo; em "Todos", agrupa todas as categorias
+  // na ordem definida em CATEGORIES, com um cabeçalho por tema.
+  const groups = filter === 'all' ? Object.keys(CATEGORIES) : [filter];
 
-    const card = document.createElement(tag);
-    card.className = `app-card ${clickable?'clickable':''} ${app.status==='soon'?'planned':''} ${isHybrid?'hybrid':''}`;
-    if(tag==='a'){ card.href = app.url || '#'; card.target = '_blank'; card.rel = 'noopener'; }
+  groups.forEach(catKey=>{
+    const apps = APPS.filter(a=> a.cat===catKey);
+    if(!apps.length) return;
+    const cat = CATEGORIES[catKey];
 
-    card.innerHTML = `
-      <div class="app-status ${STATUS_CLASS[app.status]}">${STATUS_LABEL[app.status]}</div>
-      <div class="app-icon" style="background:linear-gradient(135deg, ${cat.g1}, ${cat.g2})">${iconSvg(app.icon)}</div>
-      <span class="app-cat" style="color:${cat.g1}">${cat.label}</span>
-      <div class="app-name">${app.title}</div>
-      <div class="app-desc">${app.desc}</div>
-      ${isHybrid
-        ? `<div class="app-hybrid-tag">${app.children.length} sub-módulos <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></div>`
-        : `<div class="app-cta">${STATUS_CTA[app.status]}${clickable?' <span class=\"arrow\">→</span>':''}</div>`}
-    `;
-
-    grid.appendChild(card);
-
-    if(isHybrid){
-      const panel = document.createElement('div');
-      panel.className = 'hybrid-panel';
-      panel.innerHTML = app.children.map(c=>{
-        const dot = STATUS_CLASS[c.status]||'soon';
-        return c.status==='live'
-          ? `<a class="hybrid-item" href="${c.url||'#'}" target="_blank" rel="noopener"><span class="dot ${dot}"></span>${c.title}</a>`
-          : `<div class="hybrid-item disabled"><span class="dot ${dot}"></span>${c.title}</div>`;
-      }).join('');
-      grid.appendChild(panel);
-
-      card.addEventListener('click', ()=>{
-        card.classList.toggle('hybrid-open');
-        panel.classList.toggle('open');
-      });
+    if(filter==='all'){
+      const heading = document.createElement('div');
+      heading.className = 'cat-heading';
+      heading.innerHTML = `<span class="dot" style="background:${cat.g1}"></span>${cat.label}<span class="cnt">${apps.length}</span>`;
+      grid.appendChild(heading);
     }
+
+    apps.forEach(app=>{
+      const isHybrid = Array.isArray(app.children) && app.children.length>0;
+      const clickable = app.status==='live' || isHybrid;
+      const tag = isHybrid ? 'div' : (clickable ? 'a' : 'div');
+
+      const card = document.createElement(tag);
+      card.className = `app-card ${clickable?'clickable':''} ${app.status==='soon'?'planned':''} ${isHybrid?'hybrid':''}`;
+      if(tag==='a'){ card.href = app.url || '#'; card.target = '_blank'; card.rel = 'noopener'; }
+      card.style.setProperty('--accent-top', cat.g1);
+
+      card.innerHTML = `
+        <div class="app-status ${STATUS_CLASS[app.status]}">${STATUS_LABEL[app.status]}</div>
+        <div class="app-icon" style="background:linear-gradient(135deg, ${cat.g1}, ${cat.g2})">${iconSvg(app.icon)}</div>
+        <span class="app-cat" style="color:${cat.g1}">${cat.label}</span>
+        <div class="app-name">${app.title}</div>
+        ${isHybrid
+          ? `<div class="app-hybrid-tag">${app.children.length} sub-módulos <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></div>`
+          : `<div class="app-cta">${STATUS_CTA[app.status]}${clickable?' <span class=\"arrow\">→</span>':''}</div>`}
+      `;
+
+      grid.appendChild(card);
+
+      if(isHybrid){
+        const panel = document.createElement('div');
+        panel.className = 'hybrid-panel';
+        panel.innerHTML = app.children.map(c=>{
+          const dot = STATUS_CLASS[c.status]||'soon';
+          return c.status==='live'
+            ? `<a class="hybrid-item" href="${c.url||'#'}" target="_blank" rel="noopener"><span class="dot ${dot}"></span>${c.title}</a>`
+            : `<div class="hybrid-item disabled"><span class="dot ${dot}"></span>${c.title}</div>`;
+        }).join('');
+        grid.appendChild(panel);
+
+        card.addEventListener('click', ()=>{
+          card.classList.toggle('hybrid-open');
+          panel.classList.toggle('open');
+        });
+      }
+    });
   });
 
   // ghost card — sempre visível, lembra como o repositório cresce
