@@ -405,7 +405,7 @@ function renderGrid(filter){
     if(filter==='all'){
       const heading = document.createElement('div');
       heading.className = 'cat-heading';
-      heading.innerHTML = `<span class="dot" style="background:${cat.g1}"></span>${cat.label}<span class="cnt">${apps.length}</span>`;
+      heading.innerHTML = `<span class="dot" style="background:${cat.g1}"></span>${cat.label}`;
       grid.appendChild(heading);
     }
 
